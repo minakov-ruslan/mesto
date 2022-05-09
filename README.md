@@ -10,4 +10,4 @@
 * media queries,
 * JavaScript.
 ***
-[Ссылка на GitHub pages]()
+[Ссылка на GitHub Pages](https://minakov-ruslan.github.io/mesto/index.html)
