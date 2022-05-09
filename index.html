@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto Russia</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body class="page">
+  <div class="page__size">
+
+    <header class="header">
+      <img src="./images/header-logo.svg" alt="Логотип Mesto Russia" class="header__logo">
+    </header>
+
+    <main class="content">
+
+      <section class="profile">
+        <img src="./images/avatar.png" alt="Аватар" class="profile__avatar">
+        <div class="profile__info">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <button class="profile__edit-button" type="button"></button>
+          <p class="profile__subtitle">Исследователь океана</p>
+        </div>
+        <button class="profile__add-button" type="button"></button>
+      </section>
+
+      <section class="cards">
+        <ul class="cards__list">
+          <li class="card">
+            <img src="./images/Zelenograd.jpg" alt="Рожь в Зеленограде" class="card__image">
+            <div class="card__container">
+              <h2 class="card__title">Зеленоград</h2>
+              <button class="card__like-button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img src="./images/baikal.jpg" alt="Лёд Байкала" class="card__image">
+            <div class="card__container">
+              <h2 class="card__title">Байкал</h2>
+              <button class="card__like-button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img src="./images/Nikola-Lenivets.jpg" alt="Арт-парк Никола-Ленивец" class="card__image">
+            <div class="card__container">
+              <h2 class="card__title">Никола - Ленивец</h2>
+              <button class="card__like-button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img src="./images/dombai.jpg" alt="Снежные горы Домбай" class="card__image">
+            <div class="card__container">
+              <h2 class="card__title">Домбай</h2>
+              <button class="card__like-button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img src="./images/krasnoyarsk.jpg" alt="Горы Красноярска" class="card__image">
+            <div class="card__container">
+              <h2 class="card__title">Красноярск</h2>
+              <button class="card__like-button" type="button"></button>
+            </div>
+          </li>
+          <li class="card">
+            <img src="./images/sochi.jpg" alt="Горный хребет в Сочи" class="card__image">
+            <div class="card__container">
+              <h2 class="card__title">Сочи</h2>
+              <button class="card__like-button" type="button"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+    </footer>
+    <section class="popup">
+      <div class="popup__container">
+        <form class="popup__form">
+          <h2 class="popup__title">Редактировать профиль</h2>
+          <input id="username" type="text" value="Жак-Ив Кусто" class="popup__input">
+          <input id="about" type="text" value="Исследователь океана" class="popup__input">
+          <button class="popup__submit-button" type="submit">Сохранить</button>
+        </form>
+        <button class="popup__close-button" type="button"></button>
+      </div>
+    </section>
+  </div>
+  <script type="text/javascript" src="./script/index.js"></script>
+</body>
+
+</html>
