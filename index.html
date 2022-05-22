@@ -28,57 +28,15 @@
       </section>
 
       <section class="cards">
-        <ul class="cards__list">
-          <li class="card">
-            <img src="./images/Zelenograd.jpg" alt="Рожь в Зеленограде" class="card__image">
-            <div class="card__container">
-              <h2 class="card__title">Зеленоград</h2>
-              <button class="card__like-button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/baikal.jpg" alt="Лёд Байкала" class="card__image">
-            <div class="card__container">
-              <h2 class="card__title">Байкал</h2>
-              <button class="card__like-button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/Nikola-Lenivets.jpg" alt="Арт-парк Никола-Ленивец" class="card__image">
-            <div class="card__container">
-              <h2 class="card__title">Никола - Ленивец</h2>
-              <button class="card__like-button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/dombai.jpg" alt="Снежные горы Домбай" class="card__image">
-            <div class="card__container">
-              <h2 class="card__title">Домбай</h2>
-              <button class="card__like-button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/krasnoyarsk.jpg" alt="Горы Красноярска" class="card__image">
-            <div class="card__container">
-              <h2 class="card__title">Красноярск</h2>
-              <button class="card__like-button" type="button"></button>
-            </div>
-          </li>
-          <li class="card">
-            <img src="./images/sochi.jpg" alt="Горный хребет в Сочи" class="card__image">
-            <div class="card__container">
-              <h2 class="card__title">Сочи</h2>
-              <button class="card__like-button" type="button"></button>
-            </div>
-          </li>
-        </ul>
+        <ul class="cards__list"></ul>
       </section>
     </main>
 
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
-    <section class="popup">
+
+    <section class="popup popup_type_edit-profile">
       <div class="popup__container">
         <form class="form" name="edit-profile">
           <h2 class="form__title">Редактировать профиль</h2>
@@ -89,6 +47,38 @@
         <button class="popup__close-button" type="button"></button>
       </div>
     </section>
+
+    <section class="popup popup_type_add-card">
+      <div class="popup__container">
+        <form class="form" name="add-card">
+          <h2 class="form__title">Новое место</h2>
+          <input id="title" type="text" placeholder="Название" class="form__input" name="title">
+          <input id="link" type="url" placeholder="Ссылка на картинку" class="form__input" name="link">
+          <button class="form__submit-button" type="submit">Создать</button>
+        </form>
+        <button class="popup__close-button" type="button"></button>
+      </div>
+    </section>
+
+    <section class="popup popup__overlay popup_type_zoom-image">
+      <div class="popup__gallery">
+        <img class="popup__image" src="#" alt="">
+        <p class="popup__caption"></p>
+        <button class="popup__close-button" type="button"></button>
+      </div>
+    </section>
+
+    <template id="card-template">
+      <li class="card">
+        <button class="card__delete-button" type="button"></button>
+        <img class="card__image" src="#" alt="">
+        <div class="card__container">
+          <h2 class="card__title"></h2>
+          <button class="card__like-button" type="button"></button>
+        </div>
+      </li>
+    </template>
+
   </div>
   <script type="text/javascript" src="./script/index.js"></script>
 </body>
