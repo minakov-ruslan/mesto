@@ -8,7 +8,7 @@
   border: none;
   border-radius: 2px;
   cursor: pointer;
-  margin: 48px 0 37px;
+  margin: 13px 0 37px;
   transition: opacity .25s ease-in-out;
 }
 
@@ -20,6 +20,6 @@
   .form__submit-button {
     min-height: 46px;
     font-size: 14px;
-    margin: 45px 0 25px;
+    margin: 10px 0 25px;
   }
 }

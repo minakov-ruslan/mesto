@@ -39,17 +39,35 @@ const initialCards = [
     name: 'Сочи',
     link: 'https://images.unsplash.com/photo-1604953364318-dcf6d8273c0d?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2274'
   }
-]; 
+];
 const cardTemplate = document.querySelector('#card-template').content;
 const cardList = document.querySelector('.cards__list');
 
+function closePopupByEsc(evt) {
+  if (evt.key === 'Escape') {
+    const popupOpen = document.querySelector('.popup_opened');
+    closePopup(popupOpen);
+  }
+}
+
+function closePopupByOverlay(evt) {
+  if (evt.target.classList.contains('popup')) {
+    const popupOpen = document.querySelector('.popup_opened');
+    closePopup(popupOpen);
+  }
+}
 
 function openPopup(popupElement) {
+  resetValidation(popupElement, config)
   popupElement.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsc);
+  document.addEventListener('click', closePopupByOverlay);
 }
 
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsc);
+  document.removeEventListener('click', closePopupByOverlay);
 }
 
 function formEditSubmitHandler(evt) {
@@ -61,7 +79,7 @@ function formEditSubmitHandler(evt) {
 
 function formAddSubmitHandler(evt) {
   evt.preventDefault();
-  renderCard({name: titleInput.value, link: linkInput.value});
+  renderCard({ name: titleInput.value, link: linkInput.value });
   closePopup(popupAdd);
   formAdd.reset();
 }
@@ -87,7 +105,7 @@ function renderCard(card) {
   cardList.prepend(createCard(card));
 }
 
-initialCards.forEach( card => renderCard(card));
+initialCards.forEach(card => renderCard(card));
 formEdit.addEventListener('submit', formEditSubmitHandler);
 formAdd.addEventListener('submit', formAddSubmitHandler);
 buttonEdit.addEventListener('click', () => {
@@ -95,7 +113,10 @@ buttonEdit.addEventListener('click', () => {
   jobInput.value = profileJob.textContent;
   openPopup(popupEdit);
 });
-buttonAdd.addEventListener('click', () => openPopup(popupAdd));
+buttonAdd.addEventListener('click', () => {
+  formAdd.reset();
+  openPopup(popupAdd);
+});
 popupCloseButtons.forEach(button => {
   const buttonsPopup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(buttonsPopup));
