@@ -2,7 +2,6 @@ const popupEdit = document.querySelector('.popup_type_edit-profile');
 const popupAdd = document.querySelector('.popup_type_add-card');
 const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
-const popupCloseButtons = document.querySelectorAll('.popup__close-button');
 const formEdit = document.querySelector('[name="edit-profile"]');
 const nameInput = document.querySelector('[name = "username"]');
 const jobInput = document.querySelector('[name = "about"]');
@@ -41,7 +40,7 @@ const initialCards = [
   }
 ];
 const cardTemplate = document.querySelector('#card-template').content;
-const cardList = document.querySelector('.cards__list');
+const cardsContainer = document.querySelector('.cards__list');
 
 function closePopupByEsc(evt) {
   if (evt.key === 'Escape') {
@@ -51,23 +50,21 @@ function closePopupByEsc(evt) {
 }
 
 function closePopupByOverlay(evt) {
-  if (evt.target.classList.contains('popup')) {
-    const popupOpen = document.querySelector('.popup_opened');
-    closePopup(popupOpen);
+  if ((evt.target.classList.contains('popup')) || (evt.target.classList.contains('popup__close-button'))) {
+    closePopup(evt.currentTarget);
   }
 }
 
 function openPopup(popupElement) {
-  resetValidation(popupElement, config)
   popupElement.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupByEsc);
-  document.addEventListener('click', closePopupByOverlay);
+  popupElement.addEventListener('mousedown', closePopupByOverlay);
 }
 
 function closePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupByEsc);
-  document.removeEventListener('click', closePopupByOverlay);
+  popupElement.removeEventListener('mousedown', closePopupByOverlay);
 }
 
 function formEditSubmitHandler(evt) {
@@ -102,7 +99,7 @@ function createCard(card) {
 }
 
 function renderCard(card) {
-  cardList.prepend(createCard(card));
+  cardsContainer.prepend(createCard(card));
 }
 
 initialCards.forEach(card => renderCard(card));
@@ -111,13 +108,11 @@ formAdd.addEventListener('submit', formAddSubmitHandler);
 buttonEdit.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  resetValidation(popupEdit, config);
   openPopup(popupEdit);
 });
 buttonAdd.addEventListener('click', () => {
   formAdd.reset();
+  resetValidation(popupAdd, config);
   openPopup(popupAdd);
-});
-popupCloseButtons.forEach(button => {
-  const buttonsPopup = button.closest('.popup');
-  button.addEventListener('click', () => closePopup(buttonsPopup));
 });
