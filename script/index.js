@@ -77,33 +77,44 @@ function closePopup(popupElement) {
   popupElement.removeEventListener('mousedown', closePopupByOverlay);
 }
 
-function formEditSubmitHandler(evt) {
+function handleCardClick(name , link) {
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupCaption.textContent = name;
+  openPopup(popupZoom);
+}
+
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popupEdit);
 }
 
-function formAddSubmitHandler(evt) {
+function handleCardFormSubmit(evt) {
   evt.preventDefault();
   renderCard({ name: titleInput.value, link: linkInput.value });
   closePopup(popupAdd);
   formAdd.reset();
 }
 
-function renderCard(item) {
-  const card = new Card (item, '#card-template')
+function createCard(item) {
+  const card = new Card(item, '#card-template', handleCardClick);
   const cardElement = card.generateCard();
-  cardsContainer.prepend(cardElement);
+  return cardElement;
 }
 
-const profileEditFormValidator = new FormValidator (config, formEdit);
+function renderCard(item) {
+  cardsContainer.prepend(createCard(item));
+}
+
+const profileEditFormValidator = new FormValidator(config, formEdit);
 profileEditFormValidator.enableValidation();
-const cardAddFormValidator = new FormValidator (config, formAdd);
+const cardAddFormValidator = new FormValidator(config, formAdd);
 cardAddFormValidator.enableValidation();
 
-formEdit.addEventListener('submit', formEditSubmitHandler);
-formAdd.addEventListener('submit', formAddSubmitHandler);
+formEdit.addEventListener('submit', handleProfileFormSubmit);
+formAdd.addEventListener('submit', handleCardFormSubmit);
 buttonEdit.addEventListener('click', () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
@@ -120,4 +131,4 @@ initialCards.forEach((item) => {
   renderCard(item);
 });
 
-export {popupZoom, popupImage, popupCaption, openPopup};
+export default handleCardClick;
