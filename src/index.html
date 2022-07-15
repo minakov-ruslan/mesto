@@ -5,20 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto Russia</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 
 <body class="page">
   <div class="page__size">
 
     <header class="header">
-      <img src="./images/header-logo.svg" alt="Логотип Mesto Russia" class="header__logo">
+      <img src="<%=require('./images/header-logo.svg')%>" alt="Логотип Mesto Russia" class="header__logo">
     </header>
 
     <main class="content">
 
       <section class="profile">
-        <img src="./images/avatar.png" alt="Аватар" class="profile__avatar">
+        <img src="<%=require('./images/avatar.png')%>" alt="Аватар" class="profile__avatar">
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
           <button class="profile__edit-button" type="button"></button>
@@ -56,7 +55,7 @@
       <div class="popup__container">
         <form class="form" name="add-card" novalidate>
           <h2 class="form__title">Новое место</h2>
-          <input id="title-input" type="text" placeholder="Название" class="form__input" name="title" minlength="2"
+          <input id="title-input" type="text" placeholder="Название" class="form__input" name="name" minlength="2"
             maxlength="30" required>
           <span class="form__input-error title-input-error"></span>
           <input id="link-input" type="url" placeholder="Ссылка на картинку" class="form__input" name="link" required>
@@ -87,7 +86,6 @@
     </template>
 
   </div>
-  <script type="module" src="./script/index.js"></script>
 </body>
 
 </html>
