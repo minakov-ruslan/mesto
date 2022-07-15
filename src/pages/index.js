@@ -55,7 +55,7 @@ const config = {
   errorClass: 'form__input-error_active'
 };
 
-const profileInfo = new UserInfo(profileName, profileAbout);
+const profileInfo = new UserInfo({nameSelector: profileName, infoSelector: profileAbout});
 
 const popupImage = new PopupWithImage(popupZoomImage);
 popupImage.setEventListeners();
@@ -82,7 +82,7 @@ const cardList = new Section({
 const popupAddCard = new PopupWithForm(popupAddCardSelector, item => cardList.addItem(createCard(item)));
 popupAddCard.setEventListeners();
 
-const popupEditProfile = new PopupWithForm(popupEditProfileSelector, () => profileInfo.setUserInfo(nameInput.value, infoInput.value));
+const popupEditProfile = new PopupWithForm(popupEditProfileSelector, user => profileInfo.setUserInfo(user));
 popupEditProfile.setEventListeners();
 
 buttonAdd.addEventListener('click', () => {
