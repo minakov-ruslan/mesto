@@ -17,7 +17,10 @@
     <main class="content">
 
       <section class="profile">
-        <img src="<%=require('./images/avatar.png')%>" alt="Аватар" class="profile__avatar">
+        <div class="profile__container">
+          <img src="#" alt="Аватар" class="profile__avatar">
+          <button class="profile__edit-avatar-button" type="button"></button>
+        </div>
         <div class="profile__info">
           <h1 class="profile__title">Жак-Ив Кусто</h1>
           <button class="profile__edit-button" type="button"></button>
@@ -42,8 +45,8 @@
           <input id="username-input" type="text" value="Жак-Ив Кусто" class="form__input" name="username" minlength="2"
             maxlength="40" required>
           <span class="form__input-error username-input-error"></span>
-          <input id="about-input" type="text" value="Исследователь океана" class="form__input" name="about" minlength="2"
-            maxlength="200" required>
+          <input id="about-input" type="text" value="Исследователь океана" class="form__input" name="about"
+            minlength="2" maxlength="200" required>
           <span class="form__input-error about-input-error"></span>
           <button class="form__submit-button" type="submit">Сохранить</button>
         </form>
@@ -74,13 +77,39 @@
       </div>
     </section>
 
+    <section class="popup popup_type_delete-card">
+      <div class="popup__container">
+        <form class="form" name="delete-card">
+          <h2 class="form__title">Вы уверены?</h2>
+          <button class="form__submit-button" type="submit">Да</button>
+        </form>
+        <button class="popup__close-button" type="button"></button>
+      </div>
+    </section>
+
+    <section class="popup popup_type_edit-avatar">
+      <div class="popup__container">
+        <form class="form" name="edit-avatar">
+          <h2 class="form__title">Обновить аватар</h2>
+          <input id="avatar-input" type="url" placeholder="Ссылка на картинку" class="form__input" name="avatar"
+            required>
+          <span class="form__input-error avatar-input-error"></span>
+          <button class="form__submit-button" type="submit">Сохранить</button>
+        </form>
+        <button class="popup__close-button" type="button"></button>
+      </div>
+    </section>
+
     <template id="card-template">
       <li class="card">
-        <button class="card__delete-button" type="button"></button>
+        <button class="card__delete-button card__delete-button_inactive" type="button"></button>
         <img class="card__image" src="#" alt="">
         <div class="card__container">
           <h2 class="card__title"></h2>
-          <button class="card__like-button" type="button"></button>
+          <div class="card__like-container">
+            <button class="card__like-button" type="button"></button>
+            <span class="card__like-counter">0</span>
+          </div>
         </div>
       </li>
     </template>
