@@ -1,5 +1,5 @@
 import './index.css'
-import Api from '../components/Api';
+import Api from '../components/Api.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -8,35 +8,27 @@ import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import { data } from 'autoprefixer';
+import {
+  buttonEditProfile,
+  buttonAddCard,
+  buttonEditAvatar,
+  formEditProfile,
+  formAddCard,
+  formEditAvatar,
+  profileName,
+  profileAbout,
+  profileAvatar,
+  popupZoomImage,
+  cardSelector,
+  cardsContainer,
+  popupAddCardSelector,
+  popupEditProfileSelector,
+  popupDeleteCardSelector,
+  popupEditAvatarSelector,
+  config
+} from '../utils/constants.js';
 
-const buttonEditProfile = document.querySelector('.profile__edit-button');
-const buttonAddCard = document.querySelector('.profile__add-button');
-const buttonEditAvatar = document.querySelector('.profile__edit-avatar-button');
-const formEditProfile = document.querySelector('[name="edit-profile"]');
-const nameInput = document.querySelector('[name = "username"]');
-const infoInput = document.querySelector('[name = "about"]');
-const formAddCard = document.querySelector('[name="add-card"]');
-const formEditAvatar = document.querySelector('[name="edit-avatar"]');
-const profileName = '.profile__title';
-const profileAbout = '.profile__subtitle';
-const profileAvatar = '.profile__avatar';
-const popupZoomImage = '.popup_type_zoom-image';
-const cardSelector = '#card-template';
-const cardsContainer = '.cards__list';
-const popupAddCardSelector = '.popup_type_add-card';
-const popupEditProfileSelector = '.popup_type_edit-profile';
-const popupDeleteCardSelector = '.popup_type_delete-card';
-const popupEditAvatarSelector = '.popup_type_edit-avatar';
 let userId;
-
-const config = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit-button',
-  inactiveButtonClass: 'form__submit-button_disabled',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input-error_active'
-};
 
 const api = new Api({
   url: 'https://mesto.nomoreparties.co/v1/cohort-46',
@@ -69,7 +61,7 @@ const createCard = item => {
     handleCardClick: item => popupImage.open(item),
     handleDeleteClick: cardId => {
       popupConfirmDelete.open();
-      popupConfirmDelete.submitForm(() => {
+      popupConfirmDelete.setSubmitHandler(() => {
         api.deleteCard(cardId)
           .then(() => {
             card.deleteCard();
@@ -145,9 +137,8 @@ buttonAddCard.addEventListener('click', () => {
 
 buttonEditProfile.addEventListener('click', () => {
   const userInfo = profileInfo.getUserInfo();
-  nameInput.value = userInfo.name;
-  infoInput.value = userInfo.info;
   profileEditFormValidator.resetValidation();
+  popupEditProfile.setInputValues(userInfo);
   popupEditProfile.open();
 });
 
@@ -156,14 +147,11 @@ buttonEditAvatar.addEventListener('click', () => {
   popupEditAvatar.open();
 })
 
-api.getUserInfo()
-  .then(userInfo => {
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userInfo, initialCards]) => {
     profileInfo.setUserInfo(userInfo);
     profileInfo.setUserAvatar(userInfo);
     userId = userInfo._id;
+    cardList.renderItems(initialCards);
   })
-  .catch(err => console.log(err));
-
-api.getInitialCards()
-  .then(initialCards => cardList.renderItems(initialCards))
   .catch(err => console.log(err));

@@ -14,7 +14,7 @@ export default class PopupWithConfirmation extends Popup {
     });
   }
 
-  submitForm(value) {
+  setSubmitHandler(value) {
     this._handleSubmitClick = value;
   }
 }
